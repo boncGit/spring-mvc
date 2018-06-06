@@ -138,6 +138,7 @@ POST：@RequestMapping(value = "/helloWorld",method = RequestMethod.POST)
 
  六：解决GET请求乱码的方案
 
+    springmvc中get请求不会乱码
 
  七：路径参数
 
