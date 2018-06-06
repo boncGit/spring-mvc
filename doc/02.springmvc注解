@@ -1,0 +1,187 @@
+一.@RequestMapping的位置
+可以加载类前面或者方法前面或者同时两个位置
+最终的路径是两个位置的路径的组合
+value是默认的名称，可以省略 但是如果有其他参数不能省略
+
+@Controller
+@RequestMapping("/helloWorldController")
+public class HelloWorldController {
+
+如下配置的访问路径是：协议：//主机：端口/虚拟路径/hello/world
+    @RequestMapping(value = "/helloWorld")
+    public String helloWorld(){
+        System.out.println("hello world");
+        return "helloWorld";
+    }
+}
+
+二.@RequestMapping的请求方式
+
+GET：@RequestMapping(value = "/helloWorld",method = RequestMethod.GET)
+POST：@RequestMapping(value = "/helloWorld",method = RequestMethod.POST)
+
+如果不指定method,那么可以接受任何类型的请求
+如果请求方式不正确，那么会报405错误
+
+三.处理请求参数
+
+1、自动的参数匹配：表单中控件的name值，和controller层方式的参数名一致，则匹配
+
+表单的controller和form:
+        import org.springframework.stereotype.Controller;
+        import org.springframework.web.bind.annotation.RequestMapping;
+        import org.springframework.web.bind.annotation.RequestMethod;
+        import org.springframework.web.bind.annotation.ResponseBody;
+        import org.springframework.web.servlet.ModelAndView;
+
+        import java.util.HashMap;
+        import java.util.Map;
+
+        /**
+         * Created by Mengxy on 2018/6/4.
+         */
+
+        @Controller
+        @RequestMapping("/helloWorldController")
+        public class HelloWorldController {
+
+            @RequestMapping(value = "/loginForm",method = RequestMethod.GET)
+            public String loginForm(){
+                System.out.println("用户登陆");
+                return "login";
+            }
+
+        }
+
+       <form id="a1" action="login" method="post">
+           <label for="userName">用户名：<input id="userName" type="text" name="userName"/></label>
+           <label for="password">密码：<input id="password" type="password" name="password"/></label>
+           <button>登陆</button>
+       </form>
+
+
+提交表单：
+
+@RequestMapping(value = "/login",method = RequestMethod.POST)
+    public ModelAndView login(String userName,String password){
+        System.out.println("执行登陆");
+        System.out.println("用户名："+userName);
+        System.out.println("密码："+password);
+        ModelAndView model = new ModelAndView("/helloWorld");
+        return model;
+//        return "redirect:helloWorld";  跳转的方式
+    }
+
+2.注解形式的参数匹配
+       @RequestMapping(value = "/login",method = RequestMethod.POST)
+       public ModelAndView login(@RequestParam(value = "userName", required = false) String userName, String password){
+           System.out.println("执行登陆");
+           System.out.println("用户名："+userName);
+           System.out.println("密码："+password);
+           ModelAndView model = new ModelAndView("/helloWorld");
+           return model;
+       }
+
+       注解形式的：@RequestParam(value = "userName", required = false)
+
+3.url地址中get形式的参数匹配
+
+    url: http://localhost:8080/user/userList?currentpage=1&pagesize=10
+    controller:
+    @RequestMapping(value = "/userList", method = RequestMethod.GET)
+    public String list(@RequestParam(value = "currentpage", required = false) Integer currentpage,
+                        @RequestParam(value = "pagesize", required = false) Integer pagesize ){
+        System.out.println("currentpage:"+currentpage);
+        System.out.println("pagesize:"+pagesize);
+        return "user/userList";
+    }
+
+4.可以用defaultValue设置参数的默认值
+        public String list(@RequestParam(value="currentpage",required=false,defaultValue="1") Integer currentpage,
+                        @RequestParam(value="pagesize",required = false,defaultValue="10") Integer pagesize )
+
+5.如果参数是基本类型，必须使用包装类类型
+    因为参数不存在时，springMVC会将参数的值换成null
+    使用基本数据类型会出现转换异常
+
+6.  设置参数是否可选
+    可以使用required属性设置参数是否是可选参数
+
+
+四：请求转发和请求跳转
+    请求转发：return "视图名称";
+    请求跳转：return "redirect:controller的mapping的地址";
+
+五：解决post请求乱码
+
+<!-- 解决springMvc的post乱码 -->
+  <filter>
+    <filter-name>encoding-filter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encoding-filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+以上代码放置在web.xml中，相当于servlet中的
+ request.CharacterEncoding("UTF-8");
+ response.CharacterEncoding("UTF-8");
+
+ 六：解决GET请求乱码的方案
+
+
+ 七：路径参数
+
+ 八：配置默认主页面
+
+web.xml
+  <welcome-file-list>
+    <welcome-file>/</welcome-file>
+  </welcome-file-list>
+
+controller
+    @Controller
+    public class IndexController {
+
+        @RequestMapping("/")
+        public String home(){
+            return "home";
+        }
+    }
+
+九 配置插件
+    1.配置jdk(java编译)插件
+        定义变量
+            <properties>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+            </properties>
+        pom.xml
+            <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-compiler-plugin</artifactId>
+                  <version>3.6.0</version>
+                  <configuration>
+                     <source>1.8</source>
+                     <target>1.8</target>
+                     <encoding>${project.build.sourceEncoding}</encoding>
+                  </configuration>
+             </plugin>
+     2.配置tomcat插件
+          pom.xml文件
+            <plugin>
+                      <groupId>org.apache.tomcat.maven</groupId>
+                      <artifactId>tomcat7-maven-plugin</artifactId>
+                      <configuration>
+                            <port>8001</port>
+                            <path>/springmvc</path>
+                      </configuration>
+             </plugin>

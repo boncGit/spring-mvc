@@ -1,0 +1,64 @@
+1.创建web项目
+
+2.配置web.xml文件
+    <servlet>
+        <servlet-name>springDispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- springmvc配置文件默认的名字 <servlet-name>-servlet.xml  如：springDispatcher-servlet.xml  -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath*:/mvc/spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup><!-- 服务器启动时初始化 DispatcherServlet  -->
+      </servlet>
+
+      <servlet-mapping>
+        <servlet-name>springDispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+      </servlet-mapping>
+
+3.创建spring-mvc.xml配置文件
+    <beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:context="http://www.springframework.org/schema/context"
+           xsi:schemaLocation="http://www.springframework.org/schema/beans
+                              http://www.springframework.org/schema/beans/spring-beans.xsd
+                              http://www.springframework.org/schema/context
+    				            http://www.springframework.org/schema/context/spring-context.xsd">
+        <!-- 扫描controller  -->
+        <context:component-scan base-package="com.qfedu.springmvc.controller">
+        </context:component-scan>
+
+        <!-- 视图解析器  定义jsp位置-->
+        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+            <property name="prefix" value="/WEB-INF/jsp/"/>
+            <property name="suffix" value=".jsp"/>
+        </bean>
+
+    </beans>
+
+4.创建controller
+
+ @Controller：通知spring需要扫面这个controller类，并且得到DispatcherServlet的解析
+ @RequestMapping("/helloWorld")：DispatcherServlet 根据这个配置中的url地址，决定调用那个方法
+    方法的返回时如果是String的话，说明返回的是视图的名字，DispatcherServlet会根据视图解析器中的配置找到
+    视图的完整的路径，从而解析显示视图
+
+
+    @Controller
+    public class HelloWorldController {
+
+        @RequestMapping("/helloWorld")
+        public String helloWorld(){
+            System.out.println("hello world");
+            return "helloWorld";
+        }
+    }
+
+5.创建jsp页面
+
+/WEB-INF/jsp/helloWorld.jsp
+
+6.访问路径
+
+http://localhost:8080/helloWorldController/helloWorld
