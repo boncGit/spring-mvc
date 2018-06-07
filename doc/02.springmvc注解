@@ -186,3 +186,11 @@ controller
                             <path>/springmvc</path>
                       </configuration>
              </plugin>
+
+十. @RequestHeader
+    @RequestMapping(value = "/testHeaer",method = RequestMethod.GET)
+    public String testHeaer(@RequestHeader(value = "User-Agent") String header){
+        System.out.println("header:"+ header);
+        return "success";
+    }
+

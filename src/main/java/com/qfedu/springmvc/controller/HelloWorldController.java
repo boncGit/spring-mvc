@@ -12,7 +12,7 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping("/helloWorld")
+@RequestMapping("/hello")
 public class HelloWorldController {
 
     @RequestMapping(value = "/world",method = RequestMethod.POST)
@@ -48,8 +48,8 @@ public class HelloWorldController {
         return "success";
     }
 
-
-    public String testHeaer(@RequestHeader() String header){
+    @RequestMapping(value = "/testHeaer",method = RequestMethod.GET)
+    public String testHeaer(@RequestHeader(value = "User-Agent") String header){
         System.out.println("header:"+ header);
         return "success";
     }
