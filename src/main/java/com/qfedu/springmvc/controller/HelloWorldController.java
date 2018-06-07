@@ -1,10 +1,7 @@
 package com.qfedu.springmvc.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -38,5 +35,22 @@ public class HelloWorldController {
         ModelAndView model = new ModelAndView("/helloWorld");
         return model;
 //        return "redirect:helloWorld";  跳转的方式
+    }
+
+    /**
+     * 获取cookie标签
+     * @param sessionId
+     * @return
+     */
+    @RequestMapping(value = "/testCookie",method = RequestMethod.GET)
+    public String testCookie(@CookieValue("JSESSIONID") String sessionId){
+          System.out.println("sessionId:"+sessionId);
+        return "success";
+    }
+
+
+    public String testHeaer(@RequestHeader() String header){
+        System.out.println("header:"+ header);
+        return "success";
     }
 }
