@@ -53,4 +53,10 @@ public class HelloWorldController {
         System.out.println("header:"+ header);
         return "success";
     }
+
+    @RequestMapping(value = "/testParam",params = {"userName","age!=10"})
+    public String testParam(String userName,String age){
+        System.out.println(userName+"____"+age);
+        return "success";
+    }
 }
