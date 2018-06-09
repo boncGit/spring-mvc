@@ -194,3 +194,5 @@ controller
         return "success";
     }
 
+十一、ant风格的路径
+    

@@ -59,4 +59,10 @@ public class HelloWorldController {
         System.out.println(userName+"____"+age);
         return "success";
     }
+
+    @RequestMapping(value = "/testAntpath/*/helen")//*:代表任意字符
+    public String testAntpath(){
+        System.out.println("antpath");
+        return "success";
+    }
 }
