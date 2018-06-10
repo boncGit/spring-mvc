@@ -11,14 +11,14 @@
     <title>Title</title>
 </head>
 <body>
-    <form id="a1" action="login" method="post">
-        <label for="userName">用户名：<input id="userName" type="text" name="userName"/></label>
-        <label for="password">密码：<input id="password" type="password" name="password"/></label>
-        <label for="email">邮件：<input id="email" type="text" name="email"/></label>
-        <label for="age">年龄：<input id="age" type="text" name="age"/></label>
-        <label for="province">省份：<input id="province" type="text" name="address.province"/></label>
-        <label for="city">城市：<input id="city" type="text" name="address.city"/></label>
-        <button>登陆</button>
+    <form id="a1" action="save" method="post">
+        <label for="userName">用户名：<input id="userName" type="text" name="userName"/></label><br/>
+        <label for="password">密码：<input id="password" type="password" name="password"/></label><br/>
+        <label for="email">邮件：<input id="email" type="text" name="email"/></label><br/>
+        <label for="age">年龄：<input id="age" type="text" name="age"/></label><br/>
+        <label for="province">省份：<input id="province" type="text" name="address.province"/></label><br/>
+        <label for="city">城市：<input id="city" type="text" name="address.city"/></label><br/>
+        <button>提交</button>
     </form>
 </body>
 </html>
