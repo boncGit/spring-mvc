@@ -4,18 +4,18 @@ package com.qfedu.springmvc.pojo;
  * Created by Mengxy on 2018/6/9.
  */
 public class User {
-    private String userName;
+    private String username;
     private String password;
     private String email;
     private Integer age;
     private Address address;
 
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     public void setUsername(String username) {
-        this.userName = username;
+        this.username = username;
     }
 
     public String getPassword() {
@@ -53,7 +53,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "username='" + userName + '\'' +
+                "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +

@@ -1,8 +1,13 @@
 package com.qfedu.springmvc.controller;
 
+import com.qfedu.springmvc.pojo.Address;
 import com.qfedu.springmvc.pojo.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 /**
  * Created by Mengxy on 2018/6/4.
@@ -42,5 +47,51 @@ public class UserController {
     public String saveUser(@RequestBody String param){
         System.out.println("param:"+param);
         return "success";
+    }
+
+    @RequestMapping("/edit")
+    public ModelAndView editUser(){
+        ModelAndView model = new ModelAndView("user/form");
+        User user = new User();
+        user.setAge(1);
+        user.setEmail("123");
+        user.setPassword("123");
+        user.setUsername("mengxy");
+        Address address = new Address();
+        address.setProvince("黑龙江");
+        address.setCity("哈尔滨");
+        user.setAddress(address);
+        model.addObject("user",user);
+        return model;
+    }
+
+    @RequestMapping("/edit2")
+    public String editUser2(Map<String,Object> map){
+        User user = new User();
+        user.setAge(1);
+        user.setEmail("123");
+        user.setPassword("123");
+        user.setUsername("mengxy");
+        Address address = new Address();
+        address.setProvince("黑龙江");
+        address.setCity("哈尔滨");
+        user.setAddress(address);
+        map.put("user",user);
+        return "user/form";
+    }
+
+    @RequestMapping("/edit3")
+    public String editUser3(Model model){
+        User user = new User();
+        user.setAge(1);
+        user.setEmail("123");
+        user.setPassword("123");
+        user.setUsername("mengxy");
+        Address address = new Address();
+        address.setProvince("黑龙江");
+        address.setCity("哈尔滨");
+        user.setAddress(address);
+        model.addAttribute("user",user);
+        return "user/form";
     }
 }
