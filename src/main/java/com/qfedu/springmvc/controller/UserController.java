@@ -27,4 +27,10 @@ public class UserController {
         System.out.println("id:"+id);
         return "user/editUser";
     }
+
+
+    @RequestMapping(value = "/form", method = RequestMethod.GET)
+    public String form(){
+        return "user/form";
+    }
 }
