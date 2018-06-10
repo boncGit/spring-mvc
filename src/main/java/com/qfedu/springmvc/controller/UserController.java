@@ -37,4 +37,10 @@ public class UserController {
         System.out.println(user);
         return "success";
     }
+
+    @RequestMapping(value = "/userinfo", method = RequestMethod.POST)
+    public String saveUser(@RequestBody String param){
+        System.out.println("param:"+param);
+        return "success";
+    }
 }
