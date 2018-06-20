@@ -1,0 +1,31 @@
+REST 是目前最流行的一种互联网软件架构。它结构清晰 符合标准 易于理解 扩展方便 所以得到越来越多互联网的采用
+
+具体说，就是http协议里面，四个表示操作方式的动词
+GET PUT  POST  DELETE
+
+他们分别对应四种基本操作：
+    GET 用来获取资源
+    POST 用来创建资源
+    PUT 用来更新资源
+    DELETE 用来删除资源
+
+    HiddenHttpMethodFilter:浏览器form表单只支持get和post请求  不支持delete和put请求
+    Spring添加了一个过滤器，可以将这些请求转换为标准的http方法  支持GET DELETE PUT POST
+
+
+    创建RESTful应用程序
+      1.配置过滤器
+            <filter>
+               <filter-name>HiddenHttpMethodFilter</filter-name>
+               <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+             </filter>
+             <filter-mapping>
+               <filter-name>HiddenHttpMethodFilter</filter-name>
+               <url-pattern>/*</url-pattern>
+             </filter-mapping>
+
+      2.编写controller
+
+      3.编写userList.jsp
+             实现删除功能
+

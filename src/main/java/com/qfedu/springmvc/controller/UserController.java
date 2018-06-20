@@ -99,4 +99,27 @@ public class UserController {
         model.addAttribute("user",user);
         return "user/form";
     }
+
+/*******************RESTful************************************/
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    public String list(){
+
+        return "user/userList";
+    }
+
+    @RequestMapping(value = "/userInfo/{id}",method = RequestMethod.DELETE)
+    public String delete(){
+        //执行删除
+        System.out.println("delete");
+
+        return "redirect:/user/userList";
+    }
+
+    @RequestMapping(value = "/userInfo/{id}",method = RequestMethod.PUT)
+    public String update(){
+        //执行删除
+        System.out.println("update");
+
+        return "redirect:/user/userList";
+    }
 }

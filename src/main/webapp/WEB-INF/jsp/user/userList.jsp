@@ -12,6 +12,27 @@
 </head>
 <body>
     <h1>用户列表</h1>
+    <a href="javascript:void(0)" onclick="deleteById()">删除</a>
+    <a href="javascript:void(0)" onclick="updateById()">更新</a>
 
+    <form action="userInfo/1" method="post" id="deleteForm">
+        <input type="text" name="_method" value="delete"/>
+        <button>delete提交</button>
+    </form>
+
+    <form action="userInfo/1" method="post" id="updateForm">
+        <input type="text" name="_method" value="put"/>
+        <button>update提交</button>
+    </form>
+
+    <script>
+            function deleteById(){
+                document.getElementById("deleteForm").submit();
+            }
+            function updateById(){
+                document.getElementById("updateForm").submit();
+            }
+
+    </script>
 </body>
 </html>
