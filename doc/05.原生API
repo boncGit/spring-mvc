@@ -1,0 +1,43 @@
+原生API：servlet环境中一些有用的对象
+
+HttpServletRequest
+HttpServletResponse
+HttpServletSession
+Reader
+Writer
+InputStream
+OutputStream
+
+配置servlet环境
+    pom.xml中添加
+
+ <properties>
+    <!--  jsp相关  -->
+    <jstl.version>1.2</jstl.version>
+    <servlet-api.version>2.5</servlet-api.version>
+    <jsp-api.version>2.1</jsp-api.version>
+  </properties>
+
+ <!--  jsp相关  -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>${jstl.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>${servlet-api.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>jsp-api</artifactId>
+      <version>${jsp-api.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    使用原生API
+
+    直接在controller层的方法的参数列表中添加需要的对象即可

@@ -20,6 +20,11 @@
 
     <!-- spring版本号 -->
     <spring.version>4.2.5.RELEASE</spring.version>
+
+    <!--  jsp相关  -->
+    <jstl.version>1.2</jstl.version>
+    <servlet-api.version>2.5</servlet-api.version>
+    <jsp-api.version>2.1</jsp-api.version>
   </properties>
 
   <dependencies>
@@ -83,7 +88,24 @@
       <version>${spring.version}</version>
     </dependency>
 
-
+    <!--  jsp相关  -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>${jstl.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>${servlet-api.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>jsp-api</artifactId>
+      <version>${jsp-api.version}</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>

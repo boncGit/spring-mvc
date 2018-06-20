@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -50,8 +53,10 @@ public class UserController {
     }
 
     @RequestMapping("/edit")
-    public ModelAndView editUser(){
+    public ModelAndView editUser(HttpServletRequest request, HttpServletResponse response, HttpSession session){
         ModelAndView model = new ModelAndView("user/form");
+        String sessiodId = session.getId();
+        String sessionId2 = request.getSession().getId();
         User user = new User();
         user.setAge(1);
         user.setEmail("123");
