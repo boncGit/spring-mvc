@@ -25,6 +25,8 @@
         <button>update提交</button>
     </form>
 
+    <script src="${pageContext.request.contextPath}/static/js/jquery-1.8.2.min.js"></script>
+
     <script>
             function deleteById(){
                 document.getElementById("deleteForm").submit();
