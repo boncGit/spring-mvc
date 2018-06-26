@@ -19,7 +19,13 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--  配置注解驱动   -->
+  <!--  &lt;!&ndash;  1.处理器映射器    &ndash;&gt;
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
+    &lt;!&ndash;  2.处理器适配器    &ndash;&gt;
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean>-->
+
+
+    <!--  配置注解驱动   此注解可以替代 1.处理器映射器和2.处理器适配器  -->
     <mvc:annotation-driven   />
 
     <!--  处理静态资源  -->

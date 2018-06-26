@@ -1,0 +1,20 @@
+核心组件： 处理器映射器（HandlerMapping）
+           处理器适配器（HandlerAdapter）
+           视图解析器（ViewResolver）
+
+
+     可以在springmvc.xml的配置文件中配置如下选项，修改默认的组件
+
+    <!-- 视图解析器  定义jsp位置-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--  1.处理器映射器    -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
+    <!--  2.处理器适配器    -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean>
+
+    <!--  配置注解驱动   此注解可以替代 1.处理器映射器和2.处理器适配器  -->
+        <mvc:annotation-driven   />
