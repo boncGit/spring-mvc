@@ -65,4 +65,12 @@ public class HelloWorldController {
         System.out.println("antpath");
         return "success";
     }
+
+
+    /*******************freemarker************************************/
+    @RequestMapping(value = "/testFreemarker",method = RequestMethod.GET)
+    public String testFreemarker(){
+        System.out.println("Freemarker");
+        return "test";
+    }
 }

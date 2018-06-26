@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @RequestMapping("/")
-    public String home(){
+    public String home(){//自定义主页面
         return "home";
     }
 }
