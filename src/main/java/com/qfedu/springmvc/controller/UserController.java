@@ -1,5 +1,6 @@
 package com.qfedu.springmvc.controller;
 
+import com.google.gson.Gson;
 import com.qfedu.springmvc.pojo.Address;
 import com.qfedu.springmvc.pojo.User;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -159,5 +161,30 @@ public class UserController {
         map2.put("password","654321");
         list.add(map);list.add(map2);
         return list;
+    }
+
+
+    @RequestMapping(value = "/userJsonP",method = RequestMethod.GET)
+    public void listjson(String callback,HttpServletResponse response){
+        List<User> list = new ArrayList<User>();
+        User user1 = new User();
+        user1.setUsername("test1");
+        user1.setPassword("123456");
+        User user2 = new User();
+        user2.setUsername("test1");
+        user2.setPassword("123456");
+        User user3 = new User();
+        user3.setUsername("test1");
+        user3.setPassword("123456");
+        list.add(user1);list.add(user2);list.add(user3);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        try {
+            response.getWriter().println(callback+"("+ json +")");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
