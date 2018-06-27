@@ -1,5 +1,9 @@
 package com.qfedu.springmvc.pojo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 /**
  * Created by Mengxy on 2018/6/9.
  */
@@ -9,6 +13,8 @@ public class User {
     private String email;
     private Integer age;
     private Address address;
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")  解决日期类型的方式之一  不建议用
+    private Date birthday;
 
     public String getUsername() {
         return username;
@@ -50,6 +56,14 @@ public class User {
         this.address = address;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -58,6 +72,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", age=" + age +
                 ", address=" + address +
+                ", birthday=" + birthday +
                 '}';
     }
 }
