@@ -10,6 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -121,5 +124,40 @@ public class UserController {
         System.out.println("update");
 
         return "redirect:/user/userList";
+    }
+
+
+
+    @RequestMapping(value = "/userJson",method = RequestMethod.GET)
+    @ResponseBody
+    public List<User> getUserJson(){
+        //执行删除
+        System.out.println("userjson数据");
+        List<User> list = new ArrayList<User>();
+        User user1 = new User();
+        user1.setUsername("test1");
+        user1.setPassword("123456");
+        User user2 = new User();
+        user2.setUsername("test1");
+        user2.setPassword("123456");
+        User user3 = new User();
+        user3.setUsername("test1");
+        user3.setPassword("123456");
+        list.add(user1);list.add(user2);list.add(user3);
+        return list;
+    }
+
+    @RequestMapping(value = "/userMap",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Map<String,Object>> getUserMap(){
+        List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("userName","test1");
+        map.put("password","123456");
+        Map<String,Object> map2 = new HashMap<String,Object>();
+        map2.put("userName","test2");
+        map2.put("password","654321");
+        list.add(map);list.add(map2);
+        return list;
     }
 }

@@ -1,0 +1,22 @@
+1.引包
+    <!--  json -->
+    <jackson-databind.version>2.1.5</jackson-databind.version>
+
+    <!-- 返回json数据  -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson-databind.version}</version>
+    </dependency>
+
+    或者
+
+        <dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+          <version>2.8.0</version>
+        </dependency>
+
+2.注解
+
+@ResponseBody
