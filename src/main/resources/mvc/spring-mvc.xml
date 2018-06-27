@@ -63,6 +63,7 @@
         <property name="converters">
             <set>
                 <bean class="com.qfedu.springmvc.converter.DateConverter"></bean><!--自定义-->
+                <bean class="com.qfedu.springmvc.converter.UserConverter"></bean><!--自定义-->
             </set>
         </property>
     </bean>
