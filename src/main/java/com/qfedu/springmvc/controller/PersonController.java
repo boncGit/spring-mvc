@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 @RequestMapping("/person")
-public class Person {
+public class PersonController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(@RequestParam(value="currentpage",required=false,defaultValue="1") Integer currentpage,
