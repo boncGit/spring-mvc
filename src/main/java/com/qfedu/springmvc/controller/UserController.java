@@ -30,7 +30,6 @@ public class UserController {
                         @RequestParam(value="pagesize",required=false,defaultValue="10") Integer pagesize ){
         System.out.println("currentpage:"+currentpage);
         System.out.println("pagesize:"+pagesize);
-
         return "user/userList";
     }
 
@@ -109,7 +108,7 @@ public class UserController {
 /*******************RESTful************************************/
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String list(){
-
+        Integer.parseInt("abc");
         return "user/userList";
     }
 
@@ -130,7 +129,7 @@ public class UserController {
     }
 
 
-
+/***********************************json************************************/
     @RequestMapping(value = "/userJson",method = RequestMethod.GET)
     @ResponseBody
     public List<User> getUserJson(){
@@ -202,4 +201,24 @@ public class UserController {
         map.put("msg","保存成功");
         return map;
     }
+
+
+/******************* 异常处理 ************************************/
+        @ExceptionHandler
+        public ModelAndView handlerException1(Exception ex){
+            System.out.println("出现异常："+ex);
+            ModelAndView model = new ModelAndView("error/error");
+            model.addObject("exception",ex);
+            return model;
+        }
+
+        @ExceptionHandler(NumberFormatException.class)
+        public ModelAndView handlerException2(Exception ex){
+            System.out.println("出现异常："+ex);
+            ModelAndView model = new ModelAndView("error/error");
+            model.addObject("exception",ex);
+            return model;
+        }
+
+
 }

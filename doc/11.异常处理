@@ -1,0 +1,20 @@
+实例1：简单异常处理
+
+1.在controller层中创建一个异常处理的方法，并且添加@ExceptionHandler注解
+
+            @ExceptionHandler
+            public ModelAndView exception(Exception ex){
+                System.out.println("出现异常："+ex);
+                ModelAndView model = new ModelAndView("error/error");
+                model.addObject("exception",ex);
+                return model;
+            }
+
+2.创建错误页面
+
+注意：不能使用Map传值  Map不能携带异常对象
+
+
+实例2：
+
+   可以为@ExceptionHandler添加一个参数，如下

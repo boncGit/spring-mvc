@@ -12,7 +12,7 @@ springMvc返回值类型
 
     返回对象，一般用于json数据的返回
 
-4.void
+4.void（可以返回任何数据类型）
     返回其他的MIME类型时，通常需要将其他的方法定义为void
 
-     response.getWriter().print();
+     response.getWriter().print("任何数据类型");
