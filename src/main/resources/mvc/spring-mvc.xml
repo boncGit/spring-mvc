@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                           http://www.springframework.org/schema/beans/spring-beans.xsd
                           http://www.springframework.org/schema/context
@@ -13,50 +14,74 @@
     <context:component-scan base-package="com.qfedu.springmvc.controller">
     </context:component-scan>
 
+    <!--                           JSP                                   -->
     <!-- 视图解析器  定义jsp位置-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
-        <property name="order" value="2" /><!-- 优先级 -->
+        <property name="order" value="1" /><!--order属性从0开始，越小优先级越高-->
     </bean>
 
 
-    <!-- 配置freeMarker视图解析器 -->
-    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
-        <property name="contentType" value="text/html; charset=utf-8" />
-        <property name="suffix" value=".ftl" />
-        <property name="order" value="1" /><!-- 优先级 -->
-    </bean>
+    <!--&lt;!&ndash;                           ftl                                   &ndash;&gt;-->
+    <!--&lt;!&ndash; 配置freeMarker视图解析器 &ndash;&gt;-->
+    <!--<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">-->
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />-->
+        <!--<property name="contentType" value="text/html; charset=utf-8" />-->
+        <!--<property name="suffix" value=".ftl" />-->
+        <!--<property name="order" value="2" />&lt;!&ndash;order属性从0开始，越小优先级越高&ndash;&gt;-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; FreeMarker模板路径 &ndash;&gt;-->
+    <!--<bean id="freemarkerFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">-->
+        <!--<property name="templateLoaderPath">-->
+            <!--<value>/WEB-INF/templates/</value>-->
+        <!--</property>-->
+        <!--<property name="freemarkerVariables">-->
+            <!--<map>-->
+                <!--<entry key="xml_escape" value-ref="fmXmlEscape" />-->
+            <!--</map>-->
+        <!--</property>-->
+        <!--<property name="defaultEncoding">-->
+            <!--<value>utf-8</value>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />-->
 
 
-    <!-- FreeMarker模板路径 -->
-    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <!--                           html                                       -->
+    <!-- 视图解析器1:html视图解析器 必须先配置freemarkerConfig,注意html是没有prefix前缀属性的 -->
+    <bean id="freemarkerHtml" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="freemarkerSettings">
+            <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+                <property name="properties">
+                    <props>
+                        <prop key="default_encoding">utf-8</prop>
+                        <prop key="output_encoding">utf-8</prop>
+                    </props>
+                </property>
+            </bean>
+        </property>
         <property name="templateLoaderPath">
-            <value>/WEB-INF/templates/</value>
-        </property>
-        <property name="freemarkerVariables">
-            <map>
-                <entry key="xml_escape" value-ref="fmXmlEscape" />
-            </map>
-        </property>
-        <property name="defaultEncoding">
-            <value>utf-8</value>
+            <value>/WEB-INF/jsp/</value>
         </property>
     </bean>
-    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+    <bean id="htmlviewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
+          p:suffix=".html"
+          p:order="0"> <!--order属性从0开始，越小优先级越高-->
+        <property name="contentType" value="text/html;charset=UTF-8" />
+    </bean>
 
 
-    <!--  &lt;!&ndash;  1.处理器映射器    &ndash;&gt;
+
+      <!--  1.处理器映射器
       <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
-      &lt;!&ndash;  2.处理器适配器    &ndash;&gt;
+        2.处理器适配器
       <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean>-->
 
 
     <!--  配置注解驱动   此注解可以替代 1.处理器映射器和2.处理器适配器  -->
     <mvc:annotation-driven  conversion-service="myConversion" />
-
-    <!--  处理静态资源  -->
 
     <!--  类型转换器 -->
     <bean id="myConversion" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
