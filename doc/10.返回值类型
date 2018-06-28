@@ -1,0 +1,18 @@
+springMvc返回值类型
+
+1.String
+两种情况
+   （1）return "user" ：将请求转发到user视图
+   （2）return "redirect:user":将请求重定向user地址
+
+2.ModelAndView
+
+    返回数据和视图
+3.Object
+
+    返回对象，一般用于json数据的返回
+
+4.void
+    返回其他的MIME类型时，通常需要将其他的方法定义为void
+
+     response.getWriter().print();
