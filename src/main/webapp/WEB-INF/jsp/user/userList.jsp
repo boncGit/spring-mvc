@@ -35,6 +35,32 @@
                 document.getElementById("updateForm").submit();
             }
 
+        $(function(){
+            //js创建json对象的两种方式
+            var json = {id:"123",name:"mengxy"};
+            console.log(json);
+
+            var object = new Object();
+            object.id = "983737";
+            object.name = "wangqiang";
+            object.password = "123456";
+            console.log(object);
+
+
+            //将JSON对象转化为JSON字符串
+            var obj = {id: "11111", name: "test", password: "654321"};
+            var last=JSON.stringify(obj); //将JSON对象转化为JSON字符串
+            console.log(last);
+
+            //JSON字符串转换为JSON对象
+            var obj = JSON.parse(last); //由JSON字符串转换为JSON对象
+            console.log(obj);
+
+        });
+
+
+
+
     </script>
 </body>
 </html>
