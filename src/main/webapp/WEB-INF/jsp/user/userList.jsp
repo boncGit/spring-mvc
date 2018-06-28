@@ -14,6 +14,7 @@
     <h1>用户列表</h1>
     <a href="javascript:void(0)" onclick="deleteById()">删除</a>
     <a href="javascript:void(0)" onclick="updateById()">更新</a>
+    <a href="javascript:void(0)" onclick="save()">提交</a>
 
     <form action="userInfo/1" method="post" id="deleteForm">
         <input type="text" name="_method" value="delete"/>
@@ -26,7 +27,9 @@
     </form>
 
     <script src="${pageContext.request.contextPath}/static/js/jquery-1.8.2.min.js"></script>
-
+    <script>
+        var rootPath='${pageContext.request.contextPath}';
+    </script>
     <script>
             function deleteById(){
                 document.getElementById("deleteForm").submit();
@@ -34,6 +37,24 @@
             function updateById(){
                 document.getElementById("updateForm").submit();
             }
+            function save(){
+                var json = {id:"123",name:"mengxy"};
+                var str = JSON.stringify(json)
+                $.ajax({
+                    url: rootPath + '/user/userInfo',
+                    type: 'POST',
+                    dataType: "json", //可以是text，如果用text，返回的结果为字符串；如果需要json格式的，可是设置为json
+                    ContentType: "application/json; charset=utf-8",
+                    data:{str:str},
+                    success: function(data) {
+                       console.log(data);
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
+            }
+
 
         $(function(){
             //js创建json对象的两种方式

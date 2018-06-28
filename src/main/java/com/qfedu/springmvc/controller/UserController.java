@@ -1,5 +1,6 @@
 package com.qfedu.springmvc.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.qfedu.springmvc.pojo.Address;
 import com.qfedu.springmvc.pojo.User;
@@ -186,5 +187,19 @@ public class UserController {
             e.printStackTrace();
         }
 
+    }
+
+
+    @RequestMapping(value = "/userInfo",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> saveUserInfo(@RequestBody String json,HttpServletRequest request){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String str  = request.getParameter("str");
+        JSONObject jsonObject = JSONObject.parseObject(str);
+        System.out.println(jsonObject);
+        System.out.println("json格式字符串："+json);
+        map.put("state","true");
+        map.put("msg","保存成功");
+        return map;
     }
 }
