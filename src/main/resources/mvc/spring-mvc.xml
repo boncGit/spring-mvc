@@ -106,6 +106,7 @@
         <!-- 多个拦截器顺序执行 -->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/static/**"/><!--表示不拦截-->
             <bean class="com.qfedu.springmvc.interceptor.MyInterceptor1"></bean>
         </mvc:interceptor>
         <mvc:interceptor>
