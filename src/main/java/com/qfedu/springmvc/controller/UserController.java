@@ -108,7 +108,8 @@ public class UserController {
 /*******************RESTful************************************/
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String list(){
-        Integer.parseInt("abc");
+//        Integer.parseInt("abc"); //异常测试
+        System.out.println("mengxy");
         return "user/userList";
     }
 

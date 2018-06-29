@@ -18,3 +18,11 @@
 实例2：
 
    可以为@ExceptionHandler添加一个参数，如下
+
+        @ExceptionHandler(NumberFormatException.class)
+        public ModelAndView handlerException2(Exception ex){
+            System.out.println("出现异常："+ex);
+            ModelAndView model = new ModelAndView("error/error");
+            model.addObject("exception",ex);
+            return model;
+        }
